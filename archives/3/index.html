@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="blog">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          CoCo1er&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite.com/archives/3/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/img/header_img/home-bg-1-dark.jpg') 
+                /*config*/
+            
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="site-heading">
+                        <h1>CoCo1er&#39;s blog</h1>
+                        <!--<hr class="small">-->
+                        <span id="subdusi" class="subheading">热爱电子竞技的Web苟</span>
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">CoCo1er&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Main Content -->
+<div class="container">
+    <div class="row">
+        
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
+                <!-- Top -->
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+
+<!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2019/09/02/2019强网杯-随便注/">
+                <h2 class="post-title">
+                    2019强网杯-随便注
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    随便注writeup​        这是来自2019强网杯的一道注入题。
+
+inject=1’ and sleep(3) —+ 发现可以执行延时，难道可以直接盲注? 直接上sqlmap
+
+可以跑出来库名，但是跑不出表名，手动测试发现过滤了关键字。
+
+即不用select注入。并且大小写无法绕过，想到用拼接的方式构造select，这里测试发现能够执行多语句。
+
+于是可以用预编译的方式来执行一个......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by CoCo1er on
+                    2019-09-02
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#-注入" title="-注入">-注入</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2019/08/25/CTP2019-贵阳英才计划集训总结/">
+                <h2 class="post-title">
+                    CTP2019-贵阳英才计划集训总结
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    CTP2019-贵阳英才计划集训总结前言​        暑假一个人待在实验室学习总会时不时缺乏点动力，有幸在假期能被老师推荐去参加CTP2019集训。集训期间增长了不少见识，认识了许多小伙伴（大佬），还学了不少技术😄
+CTP2019活动简介：        本次集训采取封闭训练的方式，主要面向全国大学生信息安全竞赛中涌现出来的优秀参赛选手，提供前沿、专业、系统、实战的强化训练，培养高精尖......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by CoCo1er on
+                    2019-08-25
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#-CTP2019" title="-CTP2019">-CTP2019</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2019/04/12/服务端模板注入-SSTI攻击/">
+                <h2 class="post-title">
+                    服务端模板注入(SSTI攻击)
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    模板注入（SSTI）前言​    最近刷题刷到SSTI的题，最初死活找不到入题思路，后续看了WP才找到切入点，想起来自己之前挖的坑…SSTI的原理还是需要好好总结一下的。
+​    By the way..文章后部分有例题
+SSTI原理简介​    SSTI(Server-Side Template Injection)，即服务端模板注入攻击，通过与服务端模板的输入输出交互，在过滤不严格的情......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by CoCo1er on
+                    2019-04-12
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#-SSTI" title="-SSTI">-SSTI</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2019/04/04/hexo主题自定义样式/">
+                <h2 class="post-title">
+                    hexo主题自定义样式
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    hexo主题自定义样式前言​    前一阵子忙信安竞赛为了搭一个平台又去重新学习了一下前端知识。对于自己博客的样式觉得总是差点什么。于是打算自主来修改博客样式。
+
+一、了解博客样式规则这里只是大致说一下博客的样式的形成（具体的前端知识不提了也说不过来）。在此拿hexo的主流主题next为例。
+首先我们打开开发者工具（F12）
+
+其中可以看到各种样式规则。其中我们主要关注main.css 这里......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by CoCo1er on
+                    2019-04-04
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#-博客美化" title="-博客美化">-博客美化</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2019/04/03/mfw-命令注入/">
+                <h2 class="post-title">
+                    mfw(命令注入)
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    mfw// 原题来自csaw-ctf-2016-quals
+进入题目可以发现是一个个人网站。网站搭建提到了git，马上想到git源码泄露。
+.git 源码泄露 
+
+在运行git init初始化代码库的时候，会在当前目录下面产生一个.git的隐藏文件，用来记录代码的变更记录等等。在发布代码的时候，把.git这个目录没有删除，直接发布了。使用这个文件，可以用来恢复源代码。
+
+找个git泄露源码的......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by CoCo1er on
+                    2019-04-03
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#-注入" title="-注入">-注入</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2019/04/02/NaNNaNNaNNaN-Batman/">
+                <h2 class="post-title">
+                    NaNNaNNaNNaN-Batman
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    NaNNaNNaNNaN-Batman这是一道来自tinyctf-2014的web简单题
+
+题目首先给了一个附件
+
+
+其中有一些乱码，我们直接放浏览器里去执行试试
+
+我们执行后会发现当前页面被js更改了   或者：
+
+直接返回一个true 而没有改变页面（根据当前页面html构造而定，后续还发现会存在被当前页面js阻止的情况，所以干脆直接在本地运行）
+返回true并不能达到效果。我们试着把e......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by CoCo1er on
+                    2019-04-02
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#-tinyctf-2014" title="-tinyctf-2014">-tinyctf-2014</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2018/11/25/sqli-labs/">
+                <h2 class="post-title">
+                    sqli-labs
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    sqli-labsless-1首先先过一遍基本操作
+
+
+加单引号报错，检查报错原因（去掉外层单引号还剩’1’’ limit 0,1）可知sql代码中采用’$id’,尝试 and 1=1 和 and 1=2 发现存在注入
+
+采用union注入，先判断列数，发现在4时报错可知列数为3
+
+
+
+
+具体一系列注入过程如下：
+
+
+查看当前数据库和用户（有时可省，但其实很重要，root权限所有库都可以访问......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by CoCo1er on
+                    2018-11-25
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#-sqli-labs" title="-sqli-labs">-sqli-labs</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2018/11/20/win10美化/">
+                <h2 class="post-title">
+                    win10美化
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+//前言：看到自己桌面一堆乱七八糟的图标会不会很烦?(反正我是受不了，那就来美（简）化一下叭！)
+
+Win10美化
+任务栏透明化
+任务栏图标拖拽
+任务栏隐藏
+桌面图片隐藏+动态壁纸
+白色图标
+
+1. 任务栏透明化 
+推荐TranslucentTB这个小插件，可以调一下DOS设置开机自启（基本不占什么资源）
+2. 任务栏图标拖拽
+推荐Free Launch Bar, 下载完以后工具栏勾选
+
+......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by CoCo1er on
+                    2018-11-20
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#-win10美化" title="-win10美化">-win10美化</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2018/10/13/二次注入/">
+                <h2 class="post-title">
+                    二次注入
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    二次注入
+二次注入：在第一次进行数据库插入数据的时候，仅仅只是使用了 addslashes 或者是借助 get_magic_quotes_gpc 对其中的特殊字符进行了转义，在写入数据库的时候还是保留了原来的数据，但是数据本身还是恶意数据。
+在将数据存入到了数据库中之后，开发者就认为数据是可信的。在下一次进行需要进行查询的          时候，直接从数据库中取出了脏数据，没有进行进一步的......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by CoCo1er on
+                    2018-10-13
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#-sql注入" title="-sql注入">-sql注入</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2018/09/20/python2-3无缝切换/">
+                <h2 class="post-title">
+                    python2/3无缝切换
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    python 2/3 的自由切换使用大家可能会遇到这样的情况，一台电脑上同时装了python2和python3的两个版本（各种库的不兼容也是让人很无奈的了）
+下面介绍一下能够选择性切换2/3版本的方法。（python2/3版本的安装和环境配置在此不再赘述）
+
+方法一
+
+
+
+将python2/3目录下的python.exe 分别改为python2.exe  和python3.exe  命令行运......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by CoCo1er on
+                    2018-09-20
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#-python使用" title="-python使用">-python使用</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+        <li class="previous">
+            <a href="/archives/2/">&larr; Newer Posts</a>
+        </li>
+    
+    
+</ul>
+
+
+            </div>
+
+            <!-- Sidebar Container -->
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+        
+<!--
+<h5>SEARCH</h5>
+<div class="search-article" class="tags">
+	<input id="search-kw" type="text" name="search_article" placeholder="Enter keywords for search" />
+	<div class="search-img">
+		<img 
+			src="/img/search.png" 
+			alt="search" 
+			onMouseOver="this.src='/img/search-focus.png'" 
+			onMouseOut="this.src='/img/search.png'"/>
+	</div>
+</div>-->
+
+<h5>SEARCH</h5>
+<div id="site_search">
+	<div class="form-group">
+		<input type="text" id="local-search-input" name="q" results="0" placeholder="search" class="st-search-input st-default-search-input form-control"/>
+	</div>  
+	<div id="local-search-result"></div>
+</div>
+
+        <hr>
+    
+        <!-- Featured Tags -->
+
+<section>
+    <!-- no hr -->
+    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#-注入" title="-注入" rel="2">-注入</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#python反序列化" title="python反序列化" rel="2">python反序列化</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#-代码审计" title="-代码审计" rel="2">-代码审计</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#-学习笔记" title="-学习笔记" rel="4">-学习笔记</a>
+            
+        
+            
+        
+            
+        
+    </div>
+</section>
+
+        <hr>
+    
+        <!-- Short About -->
+<section class="visible-md visible-lg">
+    <h5><a href="/about/">ABOUT ME</a></h5>
+    <div class="short-about">
+
+        
+            <img id = "avatar_pic" src="/img/ironman-draw.png" />
+        
+
+        
+            <p>Welcome to visit, I&#39;m CoCo1er!</p>
+        
+
+        <!-- SNS Link -->
+        <ul class="list-inline">
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+        </ul>
+    </div>
+</section>
+        <hr>
+    
+        
+  <h5>VISITORS</h5>
+  <div class="widget">
+    <span>
+    	Viewed <b><i><span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span></i></b> Times
+	</span>
+	<br/>
+	<span>
+		<b><i><span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span></i></b> Visitors In Total
+	</span>
+  </div>
+
+        <hr>
+    
+        
+  <h5>RECENT POSTS</h5>
+  <div class="widget">
+    <ul>
+      
+        <li>
+          <a href="/2020/03/12/%E7%BA%AA%E5%BF%B5%E4%B8%80%E4%B8%8B%EF%BC%81/">纪念一下！</a>
+        </li>
+      
+        <li>
+          <a href="/2020/03/12/sqlmap%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">sqlmap学习笔记</a>
+        </li>
+      
+        <li>
+          <a href="/2019/10/07/9%E6%9C%88%E4%BB%BDWeb%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">9月份Web刷题记录</a>
+        </li>
+      
+        <li>
+          <a href="/2019/09/28/2018TWCTF%E2%80%94shrine/">2018TWCTF—shrine</a>
+        </li>
+      
+        <li>
+          <a href="/2019/09/25/2017HITCON-CTF-SSRFMe/">2017HITCON-CTF-SSRFMe</a>
+        </li>
+      
+    </ul>
+  </div>
+
+        <hr>
+    
+        <!-- Friends Blog -->
+
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+
+    
+        <li><a href="https://blog.csdn.net/d_Nail" target="_blank">Dusign&#39;s Blog</a></li>
+    
+        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+    
+        <li><a href="https://github.com/dusign" target="_blank">Dusign&#39;s Github</a></li>
+    
+        <li><a href="#" target="_blank">Other</a></li>
+    
+</ul>
+
+        <hr>
+    
+        
+    <h5>ARCHIVES</h5>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+        <hr>
+    
+        <!-- Categories -->
+
+    <h5>categories</h5>
+    <div class="widget">
+      <ul>
+        
+          <a href="categories/#渗透测试"><li>渗透测试</li></a>
+        
+          <a href="categories/#CTF"><li>CTF</li></a>
+        
+          <a href="categories/#社工"><li>社工</li></a>
+        
+          <a href="categories/#漏洞利用"><li>漏洞利用</li></a>
+        
+          <a href="categories/#杂文"><li>杂文</li></a>
+        
+          <a href="categories/#python"><li>python</li></a>
+        
+          <a href="categories/#随笔"><li>随笔</li></a>
+        
+      </ul>
+    </div>
+
+        <hr>
+    
+</div>
+
+        
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; CoCo1er 2020 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yoursite.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+</body>
+
+</html>

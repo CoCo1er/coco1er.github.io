@@ -194,10 +194,6 @@
                     
                     
                     
-                    <li>
-                        <a href="https://blog.csdn.net/d_Nail" target="_blank">Chinese Blog</a>
-                    </li>
-                    
                 </ul>
             </div>
         </div>
@@ -253,6 +249,24 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -261,28 +275,352 @@
 
         <div class="post-preview">
 
-            <a href="/2019/11/01/Hexo-Theme-Snail/">
+            <a href="/2020/03/12/纪念一下！/">
                 <h2 class="post-title">
-                    Hexo-Theme-Snail
+                    纪念一下！
                 </h2>
                 <h3 class="post-subtitle">
-                    A succinct hexo theme.
+                    
                 </h3>
                 <div class="post-content-preview">
-                    hexo-theme-snailView Hexo-Theme-Snail Sources On Github &#10174; 
-View Live Super Snail Blog &#10174;
-
-Hexo-theme-snail is a succinct hexo theme. It has two colors, light and star, that can be set ......
+                    Welcome to CoColer’s blog ！花了一整天终于把博客完善，开心！ 希望自己以后能常常更新趴！
+...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by CoCo1er on
-                    2019-11-01
+                    2020-03-12
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#hexo-theme-snail" title="hexo-theme-snail">hexo-theme-snail</a>
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/03/12/sqlmap学习笔记/">
+                <h2 class="post-title">
+                    sqlmap学习笔记
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    （之前刷基础题遇到的都是get请求的sql注入,偶然遇到post请求的注入,记录一下sqlmap新姿势）
+sqlmap（post方式注入）
+首先bp抓包，数据包copy to file
+
+sqlmap.py -r “D:\1.txt” -p admin_name - -dbs解释一下 -r是读文件 后面是刚才保存的绝对路径，-p是参数，也就是注入点（选了admin_name是注入点）- -d......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by CoCo1er on
+                    2020-03-12
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#sqlmap" title="sqlmap">sqlmap</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2019/10/07/9月份Web刷题记录/">
+                <h2 class="post-title">
+                    9月份Web刷题记录
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    9月份Web刷题记录前言​        此系列只做对BUUCTF基本的刷题记录，不做详细的wp，旨在拓宽知识面，快速定位知识点
+2018hctf—admin
+Flask框架——Session伪造
+strlower()——nodeprep.prepare——Unicode欺骗
+条件竞争
+
+一题三解
+https://www.anquanke.com/post/id/164086
+关于Sessi......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by CoCo1er on
+                    2019-10-07
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#刷题记录" title="刷题记录">刷题记录</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2019/09/28/2018TWCTF—shrine/">
+                <h2 class="post-title">
+                    2018TWCTF—shrine
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    2018TWCTF—Shrine​            很有意思的一个题，又是没见过的新操作。
+题目直接给出了源码：
+1234567891011121314151617181920212223242526import flaskimport osapp = flask.Flask(__name__)app.config['FLAG'] = os.environ.pop('FLAG')@ap......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by CoCo1er on
+                    2019-09-28
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Flask" title="Flask">Flask</a>
+                    
+                      <a href="/tags/#SSTI" title="SSTI">SSTI</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2019/09/25/2017HITCON-CTF-SSRFMe/">
+                <h2 class="post-title">
+                    2017HITCON-CTF-SSRFMe
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    2017HITCON-CTF-SSRFMe代码审计​        拿到题意直接给出了源码如下：
+123456789101112&lt;?php     $sandbox = "sandbox/sandbox";     @mkdir($sandbox);     @chdir($sandbox);     $data = shell_exec("GET " . escapeshellarg......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by CoCo1er on
+                    2019-09-25
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#GET命令执行" title="GET命令执行">GET命令执行</a>
+                    
+                      <a href="/tags/#SSRF" title="SSRF">SSRF</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2019/09/25/2019SUCTF-Pythonginx/">
+                <h2 class="post-title">
+                    2019SUCTF-Pythonginx
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    2019SUCTF-Pythonginx尝试​        拿到题发现页面有一个简单的路由的源码，除此之外尝试了扫路径抓包等操作没有格外信息，那么就仔细来研究一下这段代码
+123456789101112131415161718192021222324@app.route('/getUrl', methods=['GET', 'POST'])def getUrl():    url = re......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by CoCo1er on
+                    2019-09-25
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#idna绕过" title="idna绕过">idna绕过</a>
+                    
+                      <a href="/tags/#urllib" title="urllib">urllib</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2019/09/23/python反序列化之pickle/">
+                <h2 class="post-title">
+                    python反序列化之pickle
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    python反序列化之picklepython反序列化​        首先要提到什么是反序列化？
+​        序列化和反序列化是将一个类对象向字节流转化从而进行存储和传输，然后使用的时候再将字节流转化回原始的对象的一个过程。
+​        简单来说
+​        python数据转化成字符串——-序列化
+​        字符串转化成python数据——-反序列化
+序列化的几......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by CoCo1er on
+                    2019-09-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#python反序列化" title="python反序列化">python反序列化</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2019/09/23/CISCN2019-华北赛区-Day1-Web2-ikun/">
+                <h2 class="post-title">
+                    CISCN2019 华北赛区 Day1 Web2 ikun
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    CISCN2019-华北赛区-Day1-Web2-ikun尝试
+首先注册账号，对于这种框架下的登陆框，压根没敢想过会有什么SQL注入。
+
+在页面中发现hint：需要购买lv6，但是翻了好几页都没有找到lv6，于是用python脚本来处理
+
+发现在181页可以购买lv6，但是价格太高无法购买
+
+
+漏洞利用薅羊毛逻辑漏洞
+在页面中发现post表单，里面有对价格和折扣的定义。竟然前端处理，可以直接......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by CoCo1er on
+                    2019-09-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#JWT伪造" title="JWT伪造">JWT伪造</a>
+                    
+                      <a href="/tags/#python反序列化" title="python反序列化">python反序列化</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2019/09/16/Badusb初探/">
+                <h2 class="post-title">
+                    Badusb初探
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    Badusb初探前言​        从贵阳英才集训中，偶然接触到大师傅介绍的一种社工手段，badusb，不同于以前的那种U盘里带病毒，严格来说badusb不算是U盘，它也不提供存储功能。但是正因为它将恶意代码置于硬件中，使得杀软以及格式化等防范措施都无效。
+​        赵春师傅的badusb，自带了wifi模块，对于物理隔离的内网也能在插入badusb后建立网络与外界连通，这也是一种......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by CoCo1er on
+                    2019-09-16
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#-Badusb" title="-Badusb">-Badusb</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2019/09/16/PHP反序列化利用总结/">
+                <h2 class="post-title">
+                    PHP反序列化利用总结
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    PHP反序列化利用总结序列化​        来自PHP官方文档的解释，所有php里面的值都可以使用函数serialize()来返回一个包含字节流的字符串来表示。unserialize()函数能够重新把字符串变回php原来的值。序列化一个对象将会保存对象的所有变量，但是不会保存对象的方法，只会保存类的名字。
+魔术方法​        PHP 将所有以\（两个下划线）开头的类方法保留为魔术方法......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by CoCo1er on
+                    2019-09-16
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#-反序列化" title="-反序列化">-反序列化</a>
                     
                 </div>
             
@@ -298,6 +636,10 @@ Hexo-theme-snail is a succinct hexo theme. It has two colors, light and star, th
 
 <ul class="pager">
     
+    
+        <li class="next">
+            <a href="/archives/2/">Older Posts &rarr;</a>
+        </li>
     
 </ul>
 
@@ -346,6 +688,66 @@ Hexo-theme-snail is a succinct hexo theme. It has two colors, light and star, th
         
             
         
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#-注入" title="-注入" rel="2">-注入</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#python反序列化" title="python反序列化" rel="2">python反序列化</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#-代码审计" title="-代码审计" rel="2">-代码审计</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#-学习笔记" title="-学习笔记" rel="4">-学习笔记</a>
+            
+        
+            
+        
+            
+        
     </div>
 </section>
 
@@ -361,7 +763,7 @@ Hexo-theme-snail is a succinct hexo theme. It has two colors, light and star, th
         
 
         
-            <p>Welcome to visit, I&#39;m Dusign!</p>
+            <p>Welcome to visit, I&#39;m CoCo1er!</p>
         
 
         <!-- SNS Link -->
@@ -406,7 +808,23 @@ Hexo-theme-snail is a succinct hexo theme. It has two colors, light and star, th
     <ul>
       
         <li>
-          <a href="/2019/11/01/Hexo-Theme-Snail/">Hexo-Theme-Snail</a>
+          <a href="/2020/03/12/%E7%BA%AA%E5%BF%B5%E4%B8%80%E4%B8%8B%EF%BC%81/">纪念一下！</a>
+        </li>
+      
+        <li>
+          <a href="/2020/03/12/sqlmap%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">sqlmap学习笔记</a>
+        </li>
+      
+        <li>
+          <a href="/2019/10/07/9%E6%9C%88%E4%BB%BDWeb%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">9月份Web刷题记录</a>
+        </li>
+      
+        <li>
+          <a href="/2019/09/28/2018TWCTF%E2%80%94shrine/">2018TWCTF—shrine</a>
+        </li>
+      
+        <li>
+          <a href="/2019/09/25/2017HITCON-CTF-SSRFMe/">2017HITCON-CTF-SSRFMe</a>
         </li>
       
     </ul>
@@ -435,7 +853,7 @@ Hexo-theme-snail is a succinct hexo theme. It has two colors, light and star, th
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>
@@ -446,7 +864,19 @@ Hexo-theme-snail is a succinct hexo theme. It has two colors, light and star, th
     <div class="widget">
       <ul>
         
-          <a href="categories/#hexo"><li>hexo</li></a>
+          <a href="categories/#渗透测试"><li>渗透测试</li></a>
+        
+          <a href="categories/#CTF"><li>CTF</li></a>
+        
+          <a href="categories/#社工"><li>社工</li></a>
+        
+          <a href="categories/#漏洞利用"><li>漏洞利用</li></a>
+        
+          <a href="categories/#杂文"><li>杂文</li></a>
+        
+          <a href="categories/#python"><li>python</li></a>
+        
+          <a href="categories/#随笔"><li>随笔</li></a>
         
       </ul>
     </div>

@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="blog">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          渗透测试学习笔记-信息收集(3) - CoCo1er&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite.com/2019/09/03/渗透测试学习笔记-信息收集-3/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('')
+                /*post*/
+            
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#-学习笔记" title="-学习笔记">-学习笔记</a>
+                            
+                        </div>
+                        <h1>渗透测试学习笔记-信息收集(3)</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by CoCo1er on
+                            2019-09-03
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">4.6k</span> and
+                                Reading Time <span class="post-count">18</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">CoCo1er&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><h2 id="被动信息收集"><a href="#被动信息收集" class="headerlink" title="被动信息收集"></a>被动信息收集</h2><ul>
+<li>公开渠道可获得的信息</li>
+<li>与目标系统不产生直接交互</li>
+<li>尽量避免留下一切痕迹</li>
+</ul>
+<h3 id="收集内容"><a href="#收集内容" class="headerlink" title="收集内容"></a>收集内容</h3><ul>
+<li>IP地址段</li>
+<li>域名信息</li>
+<li>邮件地址</li>
+<li>文档图片数据</li>
+<li>公司地址</li>
+<li>公司组织架构</li>
+<li>联系电话/传真号码</li>
+<li>人员姓名/职务</li>
+<li>目标系统使用的技术构架（部分。主要还需要主动方式来收集）</li>
+<li>公开的商业信息</li>
+</ul>
+<h3 id="信息用途"><a href="#信息用途" class="headerlink" title="信息用途"></a>信息用途</h3><ul>
+<li>用信息描述目标</li>
+<li>发现</li>
+<li>社会工程学攻击</li>
+<li>物理缺口</li>
+</ul>
+<h3 id="信息收集——DNS"><a href="#信息收集——DNS" class="headerlink" title="信息收集——DNS"></a>信息收集——DNS</h3><p><img src="渗透测试学习笔记-信息收集/2.png" alt=""></p>
+<ul>
+<li>域名解析成IP地址<ul>
+<li>域名与FQDN区别 (sina.com 域名  ，  www.sina.com 只是sina.com下的一条主机记录，称为FQDN)</li>
+<li>域名记录：A、C name 、NS、MX、NS</li>
+</ul>
+</li>
+</ul>
+<p>FQDN（全限定域名）：同时带有主机名和域名的名称</p>
+<p>例如：主机名是bigserver,域名是mycompany.com,那么FQDN就是bigserver.mycompany.com。</p>
+<ul>
+<li>A记录：这个域名对应的IPv4地址</li>
+<li>AAAA记录：这个域名对应的IPv6地址</li>
+<li>CNAME记录：该域名指向了另外一个域名，这两个域名都指向同一个ip地址</li>
+<li>PTR记录：被称为指针记录，是A记录的逆向记录，作用是把ip地址解析成域名</li>
+<li>NS记录：NS记录是域名服务器记录，用来指定域名由哪台服务器来进行解析</li>
+<li>MX记录：邮件交换记录，指向这个域的smtp服务器地址</li>
+<li>TXT记录：为域名设置某条记录的说明</li>
+<li>SPF记录：SPF记录是TXT记录的一个运用。后面的备注需要按照指定的格式才能有效。</li>
+</ul>
+<h4 id="nslookup"><a href="#nslookup" class="headerlink" title="nslookup"></a>nslookup</h4><ul>
+<li>nslookup  www.sina.com</li>
+<li>server(server命令设置使用其他DNS服务器。不使用本地运营商提供的DNS服务器)</li>
+<li>type = a、mx、ns、any</li>
+<li>nslookup -type= ns example.com 159.154.70.22</li>
+</ul>
+<p>直接输入nslookup</p>
+<p>> www.sina.com</p>
+<p>或者set type=ns  &lt;==&gt; set q = ns  再查询</p>
+<p>> server 8.8.8.8</p>
+<p>（用不同dns服务器解析可能会对域名解析出不同地址，这种情况经常出现，这是因为互联网大部分网站采用智能DNS，终端用户所处的网络不同，DNS查询的结果可能是不一样的，eg：在北京查询sina.com 返回sina.com域名放置在国内的服务器的地址，在纽约查询则返回sina.com域名放置在美国的服务器的地址，就不会做远距离跨国家出口的访问，为优化互联网流量开发出来的智能功能）</p>
+<p>set q = any 查询出来既有ns记录也会有mx记录，关于域名的所有记录都有</p>
+<p>text记录中的spf记录——用于反垃圾邮件</p>
+<p>（spf记录作用也是将一个ip地址反向解析成对应域名，比如有一个邮件服务器，在上面配置了反垃圾邮件设置，开启反向的域名解析查询，当收到一封邮件的时候，服务器会对来源的地址进行spf记录的反向查询，查询到对应的域名，如果查询到的域名匹配到了发送方”填写”的域名，说明是正确的邮件服务器发来的邮件，匹配不到说明是伪造的域名发来的垃圾邮件）</p>
+<h4 id="DIG"><a href="#DIG" class="headerlink" title="DIG"></a>DIG</h4><ul>
+<li>dig  sina.com  any @8.8.8.8  (只会查sina.com的结果，不会查www.sina.com等其他带有主机名的FQDN的相关记录)</li>
+<li>dig   +noall  +answer  mail.163.com  any   （只输出的answer部分）</li>
+<li>反向查询：dig  -x  220.181.14.157 （其实就是查的ptr记录）</li>
+<li>bind版本信息： dig +noall +answer txt chaos VERSION.BIND @ns3.dnsv4.com</li>
+<li>DNS追踪： dig + trace example.com</li>
+</ul>
+<p><strong>补充：</strong></p>
+<ul>
+<li>一个ip可以绑定多个域名</li>
+<li>通常情况下一个域名同一时刻只能对应一个ip。但是在域名服务商那里，你可以把服务器群里面的多个提供相同服务的服务器IP设置一个域名可以轮询。但是同一时刻，一个域名只能解析出一个IP供你使用。这些IP可以轮流着被解析。这些IP其实对应的服务器提供的是同一种的服务。（比如说DNS轮询技术（负载均衡技术）下去查询域名，可以查出多个对应ip）</li>
+<li><strong>DNS轮询技术：</strong>是指将相同的域名解释到不同的IP，随机使用其中某台主机的技术,该项技术可以智能的调整网站的访问量到不同服务器上，减轻网站服务器的压力，实现负载匀衡</li>
+</ul>
+<p><img src="渗透测试学习笔记-信息收集/1.png" alt=""></p>
+<ul>
+<li><p>什么是bind？</p>
+<p>Bind(Berkeley Internet Name Domain Service)，它是一款实现DNS服务器的开放源码软件,够提供双向解析，转发，子域授权，view等功能,是世界上使用最为广泛的DNS服务器软件，目前Internet上半数以上的DNS服务器有都是用Bind来架设的。</p>
+</li>
+<li><p>一个最完美的dns信息收集是给一个域名，查出该域名以及其他FQDN对应的记录信息。变相思路就是渗透到DNS服务器去获取所有信息，通过dig查询bind版本可能可以得到可利用漏洞。（一般查不到..）</p>
+</li>
+<li><p>DNS追踪，绕过本地DNS服务器询问，直接去与根域服务器、com域服务器等进行<strong>迭代查询</strong>，这样就可以在查询过程中发现（com域服务器等）是否地址被改变（是否被劫持）。而直接向本地DNS服务器请求的<strong>递归查询</strong>是发现不了这个问题的。在实际抓包验证中，还是会先向本地DNS查询根域（本机默认是不知道这些根域的地址的），后续也一样的流程，相当于原来是由本地dns服务器做完后续的一切查询最后返回结果，中间过程无法得知。而trace的话是每一次对根域、com域的查询都由客户端DNS发起通过本地DNS为媒介去查询，每一次查询结果缓存在本地DNS中，下一次查询客户端信任本地DNS继续迭代查询。<strong>（递归查询抓包就2个包，trace的迭代查询抓包会出来很多包（如果本地DNS没有缓存的话），详细的迭代查询流程的包）</strong></p>
+</li>
+</ul>
+<h4 id="DNS区域传输"><a href="#DNS区域传输" class="headerlink" title="DNS区域传输"></a>DNS区域传输</h4><ul>
+<li>dig  @ns2.sina.com   sina.com   axfr   (尝试从ns2.sina.com这台域名服务器中查询出sina.com的域名下的所有主机记录信息，增加攻击面)  （大多情况连接53端口会被拒绝，axfr用的是TCP）</li>
+<li>host -T -l sina.com  ns3.sina.com/ 8.8.8.8等域名服务器 (也是全区域传输查询)</li>
+</ul>
+<h4 id="DNS字典爆破"><a href="#DNS字典爆破" class="headerlink" title="DNS字典爆破"></a>DNS字典爆破</h4><p>区域传输一般很少见，比较常见的方法是DNS字典爆破（爆破某域下的主机名）</p>
+<ul>
+<li>fierce  -dnsserver  8.8.8.8  -dns  sina.com.cn   -wordlist  a.txt   (先会进行区域传输查询，失败则继续字典爆破)</li>
+<li>dnsdict6  -d4  -t 16  -x sina.com     (速度快，字典质量较高)</li>
+<li>dnsenum  -f  dnsbig.txt   -dnsserver  8.8.8.8  sina.com  -o  sina.xml</li>
+<li>dnsmap  sina.com  -w dns.txt  （速度较慢）</li>
+<li>dnsrecon  -d  sina.com  —lifetime  10  -t brt  -D dnsbig.txt  (速度也比较快)</li>
+<li>dnsrecon  -t std -d sina.com  -D  dnsbig.txt</li>
+</ul>
+<p>推荐：dnsdict6 、 dnsrecon 、 fierceb  </p>
+<h4 id="DNS注册信息"><a href="#DNS注册信息" class="headerlink" title="DNS注册信息"></a>DNS注册信息</h4><ul>
+<li>whois  sina.com</li>
+<li>whois  -h  whois.apnic.net  192.0.43.10</li>
+</ul>
+<h3 id="搜索引擎"><a href="#搜索引擎" class="headerlink" title="搜索引擎"></a>搜索引擎</h3><ul>
+<li>公司新闻动态</li>
+<li>重要雇员信息</li>
+<li>机密文档/网络拓扑</li>
+<li>用户名/密码</li>
+<li>目标系统软硬件技术构架</li>
+</ul>
+<h4 id="SHODAN"><a href="#SHODAN" class="headerlink" title="SHODAN"></a>SHODAN</h4><ul>
+<li>搜索联网设备</li>
+<li>Banner：http、ftp、ssh、telnet</li>
+<li><a href="https://www.shodan.io/" target="_blank" rel="noopener">https://www.shodan.io/</a></li>
+<li>常见filter：<ul>
+<li>net （192.168.20.1）    eg:  net:8.8.8.8</li>
+<li>city</li>
+<li>country（CN、US）</li>
+<li>port  （80、21、22、23）</li>
+<li>os</li>
+<li>Hostname</li>
+<li>server      eg:  server: Apache</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>200 OK cisco  country:JP</li>
+<li>user:admin pass:password</li>
+<li>linux upnp avtech<ul>
+<li><a href="http://187.208.123.46:9000/" target="_blank" rel="noopener">http://187.208.123.46:9000/</a>    </li>
+<li><a href="http://118.71.214.220:9091/" target="_blank" rel="noopener">http://118.71.214.220:9091/</a></li>
+</ul>
+</li>
+</ul>
+<p><strong>搜索规则：<a href="https://www.shodan.io/explore" target="_blank" rel="noopener">https://www.shodan.io/explore</a></strong></p>
+<h4 id="Google"><a href="#Google" class="headerlink" title="Google"></a>Google</h4><ul>
+<li>+支付 -充值  （含有支付，不含有充值的搜索结果）</li>
+<li>支付 充值（含有支付或者含有充值）  “支付 充值” （就是搜索完整的一串支付充值）</li>
+<li>北京的电子商务公司—— 北京 intitle:电子商务 intext:法人 intext:电话</li>
+<li>阿里网站上的北京公司联系人—— 北京 site:alibaba.com  inurl:contact</li>
+<li>塞班司法案的PDF文档—— SOX filetype:pdf</li>
+<li>法国的支付相关的页面—— payment site:fr</li>
+</ul>
+<p>实例：</p>
+<ul>
+<li>inurl: “level/15/exec/-/show”</li>
+<li>intitle:”netbotz appliance” “ok”     eg: <a href="http://207.150.248.14" target="_blank" rel="noopener">http://207.150.248.14</a></li>
+<li>inurl:/admin/login.php</li>
+<li>inurl:qq.txt</li>
+<li>filetype:xls “username|password”</li>
+<li>inurl:ftp “password” filetype:xls site:baidu.com</li>
+</ul>
+<p><strong>搜索规则：GHDB——<a href="https://www.exploit-db.com/google-hacking-database" target="_blank" rel="noopener">https://www.exploit-db.com/google-hacking-database</a></strong></p>
+<h4 id="YANDEX"><a href="#YANDEX" class="headerlink" title="YANDEX"></a>YANDEX</h4><ul>
+<li>世界第四大搜索引擎——俄罗斯</li>
+<li><a href="https://www.yandex.com/" target="_blank" rel="noopener">https://www.yandex.com/</a></li>
+<li>偶尔有惊喜</li>
+</ul>
+<h3 id="用户信息"><a href="#用户信息" class="headerlink" title="用户信息"></a>用户信息</h3><p>​        调用搜索引擎去实现，大量并发去搜索效率高</p>
+<h4 id="theharvester"><a href="#theharvester" class="headerlink" title="theharvester"></a>theharvester</h4><p>邮件、主机</p>
+<ul>
+<li>theharvester  -d sina.com  -l 300 -b google</li>
+</ul>
+<p>文件</p>
+<ul>
+<li>metagoofil -d microsoft.com -t pdf -l 200 -o test -f 1.html</li>
+</ul>
+<h4 id="MELTAGO"><a href="#MELTAGO" class="headerlink" title="MELTAGO"></a>MELTAGO</h4><p>延展性的信息收集工具（图形化界面）</p>
+<ul>
+<li>申请账号</li>
+<li>登录使用</li>
+</ul>
+<h3 id="信息收集——其他途径"><a href="#信息收集——其他途径" class="headerlink" title="信息收集——其他途径"></a>信息收集——其他途径</h3><ul>
+<li>社交网络</li>
+<li>工商注册</li>
+<li>新闻组/论坛</li>
+<li>招聘网站</li>
+<li><a href="http://www.archive.org/web/web.php" target="_blank" rel="noopener">http://www.archive.org/web/web.php</a>  搜索网页的历史版本的页面（快照）</li>
+</ul>
+<h3 id="个人专属密码字典"><a href="#个人专属密码字典" class="headerlink" title="个人专属密码字典"></a>个人专属密码字典</h3><ul>
+<li>按个人信息生成其专属的密码字典</li>
+<li>CUPP——Common  User  Password  Profiler<ul>
+<li>git clone <a href="http://github.com/Mebus/cupp.git" target="_blank" rel="noopener">http://github.com/Mebus/cupp.git</a></li>
+<li>python cup.py  -i</li>
+</ul>
+</li>
+</ul>
+<h3 id="METADATA"><a href="#METADATA" class="headerlink" title="METADATA"></a>METADATA</h3><ul>
+<li>Exif图片信息<ul>
+<li>exiftool  a.jpg</li>
+</ul>
+</li>
+<li>Foca（Windows下图片信息）</li>
+</ul>
+<h3 id="RECON-NG"><a href="#RECON-NG" class="headerlink" title="RECON-NG"></a>RECON-NG</h3><ul>
+<li>全特性的web侦察框架、信息搜索框架</li>
+<li>基于python开发</li>
+<li>命令格式与msf一致</li>
+<li>使用方法：<ul>
+<li>模块</li>
+<li>数据库</li>
+<li>报告</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>recon-ng  -w  sina 进入“新浪”工作区</li>
+<li>框架内help 查看命令</li>
+</ul>
+<h2 id="主动信息收集"><a href="#主动信息收集" class="headerlink" title="主动信息收集"></a>主动信息收集</h2><ul>
+<li>直接与目标系统交互通信</li>
+<li>无法避免留下访问的痕迹</li>
+<li>使用受控的第三方电脑进行探测<ul>
+<li>使用代理或已经被控制的主机</li>
+<li>做好被封杀的准备</li>
+<li>使用噪声迷惑目标，淹没真实的探测流量</li>
+</ul>
+</li>
+<li>扫描<ul>
+<li>发送不同的探测，根据返回结果判断目标状态（ip层、端口层、服务层）</li>
+</ul>
+</li>
+</ul>
+<h3 id="发现"><a href="#发现" class="headerlink" title="发现"></a>发现</h3><ul>
+<li>识别活着的主机（不扫描端口）<ul>
+<li>潜在的被攻击目标</li>
+</ul>
+</li>
+<li>输出一个ip地址列表</li>
+<li>2、3、4层发现</li>
+</ul>
+<p><img src="渗透测试学习笔记-信息收集/3.png" alt=""></p>
+<p>​                                                                <strong>OSI理论7层模型（实际大多4-5层）</strong></p>
+<h4 id="发现——二层发现"><a href="#发现——二层发现" class="headerlink" title="发现——二层发现"></a>发现——二层发现</h4><ul>
+<li>优点：扫描速度快、可靠</li>
+<li>缺点：不可路由（大多数情况下）（即只在内网广播）</li>
+<li>Arp协议<ul>
+<li>抓包</li>
+</ul>
+</li>
+</ul>
+<p>（不同内网环境下可以使用的方法可能会受限，多了解）</p>
+<h5 id="arping"><a href="#arping" class="headerlink" title="arping"></a>arping</h5><p>用来发现一个主机ip是否存活在网络里</p>
+<ul>
+<li>arping</li>
+<li>arping 1.1.1.1 -c 1      （发送一个数据包）</li>
+<li>arping 1.1.1.1 -d         （发现重复响应，如果应答从两个不同mac地址发送出来响应同一个ip则中断——发现arp欺骗）（对网关进行检测） </li>
+<li>arping -c 1   1.1.1.1  | grep “bytes from”  | cut  -d “ “ -f 5 |cut -d “(“ -f 2 | cut -d “)” -f 1</li>
+<li>脚本<ul>
+<li>arping1.sh eth0 &gt;addrs</li>
+<li>arping2.sh  addrs</li>
+</ul>
+</li>
+</ul>
+<h5 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h5><ul>
+<li>nmap 1.1.1.1-254  -sn     （发送arp包，还会有dns反向查询）</li>
+<li>nmap -iL iplist.txt -sn</li>
+</ul>
+<h5 id="Netdiscover"><a href="#Netdiscover" class="headerlink" title="Netdiscover"></a>Netdiscover</h5><ul>
+<li>专用于二层发现</li>
+<li>可用于无线和交换网络环境</li>
+<li>主动和被动探测</li>
+</ul>
+<ul>
+<li>主动<ul>
+<li>netdiscover -i eth0  -r  1.1.1.0/24</li>
+<li>netdiscover -l iplist.txt</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>被动（混杂模式监听广播包）<ul>
+<li>netdiscover -p</li>
+<li>主动arp容易触发报警</li>
+</ul>
+</li>
+</ul>
+<h5 id="Scapy"><a href="#Scapy" class="headerlink" title="Scapy"></a>Scapy</h5><ul>
+<li>Scapy<ul>
+<li>作为python库进行调用</li>
+<li>也可以作为单独的工具使用</li>
+<li>抓包、分析、创建、修改、注入网络流量</li>
+</ul>
+</li>
+<li>apt-get install python-gnuplot</li>
+<li>Scapy<ul>
+<li>ARP().display()</li>
+<li>Sr1()</li>
+</ul>
+</li>
+<li>Python脚本编写</li>
+</ul>
+<h4 id="发现——三层发现"><a href="#发现——三层发现" class="headerlink" title="发现——三层发现"></a>发现——三层发现</h4><ul>
+<li>优点<ul>
+<li>可路由</li>
+<li>速度比较快</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>速度比二层慢</li>
+<li>经常被边界防火墙过滤（造成扫描结果不准确）</li>
+</ul>
+</li>
+<li>IP、icmp协议</li>
+</ul>
+<h5 id="Ping"><a href="#Ping" class="headerlink" title="Ping"></a>Ping</h5><ul>
+<li>ping  1.1.1.1 -c 2</li>
+<li>ping -R 1.1.1.1   /   traceroute  1.1.1.1 （通过TTL值从1、2、3开始置起发送ICMP包，每经过一个路由TTL值减1，到0时发送回包，此时获得第n序列的路由器ip，这种方式来获取整个路由路径）</li>
+<li>ping  1.1.1.1 -c 1 | grep “bytes from”  |  cut  -d  “ “ -f 4  |  cut  -d “:”  -f 1</li>
+<li>脚本实现（scapy）（略）</li>
+</ul>
+<h5 id="nmap-1"><a href="#nmap-1" class="headerlink" title="nmap"></a>nmap</h5><ul>
+<li>nmap  -sn  1.1.1.1-255  （在本网段下发送的arp，在外网发送的icmp数据包，同样也会有DNS解析，另外还有TCP包）</li>
+<li>nmap -iL iplist.txt -sn</li>
+</ul>
+<h5 id="fping"><a href="#fping" class="headerlink" title="fping"></a>fping</h5><p>​        比ping命令用法更丰富，可以对地址段进行ping，ping响应的内容也更多</p>
+<ul>
+<li>fping 1.1.1.1 -c 1</li>
+<li>fping  -g  1.1.1.0  1.1.1.255</li>
+<li>fping -g  1.1.1.0/24</li>
+<li>fping -f iplist.txt</li>
+</ul>
+<h5 id="Hping3"><a href="#Hping3" class="headerlink" title="Hping3"></a>Hping3</h5><p>​        几乎可以实现对包内容的每一个字段的自定义，类似scapy</p>
+<ul>
+<li>Hping<ul>
+<li>能够发送几乎任意TCP/IP包</li>
+<li>功能强大但每次只能扫描一个目标</li>
+</ul>
+</li>
+<li>hping3  1.1.1.1   —icmp  -c  2</li>
+<li>脚本方式实现：<ul>
+<li>for addr  in  $(seq 1 254) : do hping3   1.1.1.$addr  —icmp -c 1 &gt;&gt;handle.txt &amp; done</li>
+</ul>
+</li>
+</ul>
+<h4 id="发现——四层发现"><a href="#发现——四层发现" class="headerlink" title="发现——四层发现"></a>发现——四层发现</h4><p>​        此处只在于发现ip，不在于发现端口</p>
+<ul>
+<li>优点<ul>
+<li>可路由且结果可靠</li>
+<li>不太可能被防火墙过滤</li>
+<li>甚至可以发现所有端口都被过滤的主机</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>基于状态过滤的防火墙可能过滤扫描</li>
+<li>全端口扫描速度慢</li>
+</ul>
+</li>
+<li>TCP<ul>
+<li>未经请求的ACK——RST（直接发第三阶段的ACK，服务器拒绝贸然发来的ack直接回应RST包，这样证明了该主机存活）</li>
+<li>SYN——SYN/ACK、RST （正常的请求过程）</li>
+</ul>
+</li>
+<li>UDP<ul>
+<li>ICMP端口不可达、一去不复返</li>
+</ul>
+</li>
+</ul>
+<p>通过scapy构造实现（略）</p>
+<h5 id="nmap-2"><a href="#nmap-2" class="headerlink" title="nmap"></a>nmap</h5><ul>
+<li>nmap  1.1.1.1-254  -PU53  -sn</li>
+<li>nmap  1.1.1.1-254  -PA80   -sn    直接发ACK包</li>
+<li>nmap  -iL iplist.txt  -PA80  -sn</li>
+</ul>
+<p>只做主机发现，不做端口扫描</p>
+<h5 id="hping3"><a href="#hping3" class="headerlink" title="hping3"></a>hping3</h5><ul>
+<li>hping3  —udp  1.1.1.1  -c 1  返回ICMP端口不可达即证明主机存活  （UDP准确度不是很高）</li>
+</ul>
+<h3 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h3><h4 id="UDP端口扫描"><a href="#UDP端口扫描" class="headerlink" title="UDP端口扫描"></a>UDP端口扫描</h4><ul>
+<li>端口对应网络服务及应用端程序</li>
+<li>服务端程序的漏洞通过端口攻入</li>
+<li>发现开放的端口</li>
+<li>更具体地攻击面</li>
+</ul>
+<ul>
+<li>UDP端口扫描<ul>
+<li>假设ICMP  port unreachable  响应代表端口关闭</li>
+<li>目标系统不响应ICMP port unreachable时则端口开放（与主机发现相反，可能产生误判）</li>
+</ul>
+</li>
+<li>完整的UDP应用层请求<ul>
+<li>准确性高</li>
+<li>耗时巨大</li>
+</ul>
+</li>
+</ul>
+<h5 id="nmap-3"><a href="#nmap-3" class="headerlink" title="nmap"></a>nmap</h5><ul>
+<li>nmap -sU 1.1.1.1<ul>
+<li>默认的1000个端口</li>
+<li>ICMP host-unreachable （基于UDP就是基于这个特征来探测）</li>
+</ul>
+</li>
+<li>nmap -sU 192.168.1.134  -p1-65535   或者    -p-</li>
+<li>nmap  -iL  iplist.txt  -sU  -p  1-200</li>
+</ul>
+<h4 id="TCP端口扫描"><a href="#TCP端口扫描" class="headerlink" title="TCP端口扫描"></a>TCP端口扫描</h4><ul>
+<li>基于连接的协议</li>
+<li>三次握手</li>
+<li>隐蔽扫描</li>
+<li>僵尸扫描</li>
+<li>全连接扫描</li>
+<li>所有的TCP扫描方式都是基于三次握手的变化来判断目标端口状态</li>
+</ul>
+<p><img src="渗透测试学习笔记-信息收集/4.png" alt=""></p>
+<h5 id="隐蔽扫描——syn"><a href="#隐蔽扫描——syn" class="headerlink" title="隐蔽扫描——syn"></a>隐蔽扫描——syn</h5><ul>
+<li>不建立完整连接</li>
+<li>应用日志不记录扫描行为——隐蔽</li>
+</ul>
+<p>（应用层日志由于没建立连接所以不会有记录，网络层进行深度审计还是可以发现）</p>
+<ul>
+<li>nmap 192.168.1.134  -p1-100  默认按syn扫描  （加—open  只显示扫描出来的open的端口）</li>
+<li>nmap -sS 1.1.1.1  -p 80,21,25    （按syn扫描）</li>
+<li>hping3  1.1.1.1  —scan 80 -S</li>
+</ul>
+<h5 id="僵尸扫描"><a href="#僵尸扫描" class="headerlink" title="僵尸扫描"></a>僵尸扫描</h5><ul>
+<li>极其隐蔽</li>
+<li>实施条件苛刻</li>
+<li>可伪造源地址</li>
+<li>选择僵尸机<ul>
+<li>闲置系统（足够空闲，没有其他主机与它通信）</li>
+<li>系统使用递增的IPID<ul>
+<li>0</li>
+<li>随机</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="渗透测试学习笔记-信息收集/5.png" alt=""></p>
+<p>（第三步如果扫描者接到的RST包IPID=x+2则可以判断之前伪造的扫描请求端口是开放的，否则不开放的情况下IPID=x+1）</p>
+<ul>
+<li>查询是否能充当一个好的僵尸机<ul>
+<li>nmap -p445 192.168.1.133 —script=ipidseq.nse</li>
+</ul>
+</li>
+<li>扫描目标<ul>
+<li>nmap 192.168.1.134  -sI  【僵尸机ip（在同一个网络里别人的主机）】   -Pn -p 0-100</li>
+</ul>
+</li>
+</ul>
+<h4 id="服务扫描"><a href="#服务扫描" class="headerlink" title="服务扫描"></a>服务扫描</h4><ul>
+<li>识别开放端口上运行的应用</li>
+<li>识别目标操作系统</li>
+<li>提高攻击效率<ul>
+<li>Banner捕获</li>
+<li>服务识别</li>
+<li>操作系统识别</li>
+<li>SNMP分析</li>
+<li>SMB扫描</li>
+<li>防火墙识别</li>
+</ul>
+</li>
+</ul>
+<h5 id="Banner"><a href="#Banner" class="headerlink" title="Banner"></a>Banner</h5><ul>
+<li>软件开发商</li>
+<li>软件名称</li>
+<li>服务类型</li>
+<li>版本号<ul>
+<li>直接发现已知的漏洞和弱点</li>
+</ul>
+</li>
+<li>连接建立后直接获取banner（不可避免留下连接痕迹）</li>
+</ul>
+<p><strong>eg:  nc -nv 1.1.1.1 22</strong></p>
+<p>eg: 简单的一些函数测试（略）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#python socket 控制台下</span><br><span class="line">import socket</span><br><span class="line">banner &#x3D; socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line">banner.connect((&quot;192.168.1.134&quot;,21))</span><br><span class="line">banner.recv(4096)</span><br><span class="line">banner.close()</span><br><span class="line">exit()</span><br><span class="line"># 某些应用软件的banner不允许抓取，recv函数无返回将挂起</span><br></pre></td></tr></table></figure>
+<p>nmap扩展：/usr/share/nmap/scripts   自带了许多nmap脚本（lua语言编写</p>
+<p>ls | grep  ms-sql</p>
+<p><strong>eg: amap   -B  192.168.1.133  1-445  </strong></p>
+<h5 id="服务识别"><a href="#服务识别" class="headerlink" title="服务识别"></a>服务识别</h5><ul>
+<li>另类服务识别方法（banner提供的信息有限）<ul>
+<li>特征行为和响应字段</li>
+<li>不同的响应可用于识别底层操作系统</li>
+</ul>
+</li>
+</ul>
+<p><strong>eg: nmap 192.168.1.134  -p1-100  -sV  识别端口服务（不仅仅基于banner，还会基于指纹特征等）</strong></p>
+<p><strong>eg: amap 192.168.35.1 20-30  -qb</strong></p>
+<h5 id="操作系统识别"><a href="#操作系统识别" class="headerlink" title="操作系统识别"></a>操作系统识别</h5><ul>
+<li>操作系统识别技术<ul>
+<li>种类繁多</li>
+<li>好产品采用多种技术组合</li>
+</ul>
+</li>
+<li>TTL起始值<ul>
+<li>Windows：128（65-128）</li>
+<li>Linux/Unix：64（1-64）</li>
+<li>某些Unix：255</li>
+</ul>
+</li>
+</ul>
+<p><strong>eg：nmap 1.1.1.1  -O</strong></p>
+<p><strong>eg：xprobe2  192.168.1.134</strong>   （不太准）</p>
+<ul>
+<li><p>被动操作系统识别</p>
+<ul>
+<li>IDS</li>
+<li>抓包分析</li>
+</ul>
+<p><strong>eg：p0f（自动监听流量并识别os）</strong></p>
+</li>
+</ul>
+<h5 id="SNMP"><a href="#SNMP" class="headerlink" title="SNMP"></a>SNMP</h5><ul>
+<li>简单网络管理协议</li>
+<li>信息的金矿</li>
+<li>Community strings（snmp的身份验证）</li>
+<li>信息查询或重新配置</li>
+<li>经常被错误配置</li>
+<li>public / private / manager</li>
+<li><strong>MIB tree</strong><ul>
+<li>SNMP Management Information  Base (MIB)</li>
+<li>树型的网络设备管理功能数据库</li>
+<li>1.3.6.1.4.1.77.1.2.25</li>
+</ul>
+</li>
+<li>onesixtyone  1.1.1.1  public</li>
+<li>onesixtyone  -c  dict.txt  -i hosts  -o  my.log  -w 100</li>
+<li>snmpwalk  hosts  -c public  -v  2c</li>
+</ul>
+<h5 id="SMB扫描"><a href="#SMB扫描" class="headerlink" title="SMB扫描"></a>SMB扫描</h5><ul>
+<li>Server Message Block 协议<ul>
+<li>微软历史上出现安全问题最多的协议</li>
+<li>实现复杂</li>
+<li>默认开放</li>
+<li>文件共享</li>
+<li>空会话未身份认证访问（SMB1）<ul>
+<li>密码策略</li>
+<li>用户名</li>
+<li>组名</li>
+<li>机器名</li>
+<li>用户、组ID</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>nmap -v -p135,445  192.168.60.1-20</li>
+<li>nmap  192.168.1.132 -p139,445  —script=smb-os-discovery.nse</li>
+<li>nmap -v -p139,445  —script=smb-check-vulns  —script-args=unsafe=1  1.1.1.1</li>
+<li>nbtscan -r 192.168.1.0/24（nbtscan局域网下可以跨网段扫描）</li>
+</ul>
+<h5 id="SMTP扫描"><a href="#SMTP扫描" class="headerlink" title="SMTP扫描"></a>SMTP扫描</h5><ul>
+<li>发现邮箱账号</li>
+<li>nmap  smtp.163.com  -p25  —script=smtp-enum-users.nse   —script-args=smtp-enum-users.methods={VRFY}</li>
+</ul>
+<h5 id="防火墙扫描"><a href="#防火墙扫描" class="headerlink" title="防火墙扫描"></a>防火墙扫描</h5><ul>
+<li>通过检查回包，可能识别端口是否经过防火墙过滤</li>
+<li>设备多种多样，结果存在一定误差</li>
+</ul>
+<p><img src="渗透测试学习笔记-信息收集/6.png" alt=""></p>
+<h5 id="负载均衡识别"><a href="#负载均衡识别" class="headerlink" title="负载均衡识别"></a>负载均衡识别</h5><ul>
+<li>广域负载均衡<ul>
+<li>DNS</li>
+</ul>
+</li>
+<li>HTTP-load balancing<ul>
+<li>Nginx</li>
+<li>Apache</li>
+</ul>
+</li>
+<li>lbd www.baidu.com</li>
+<li>lbd mail.163.com</li>
+</ul>
+<h5 id="WAF识别"><a href="#WAF识别" class="headerlink" title="WAF识别"></a>WAF识别</h5><ul>
+<li>WEB应用防火墙</li>
+<li>wafw00f  -l</li>
+<li>wafw00f <a href="http://www.microsoft.com" target="_blank" rel="noopener">http://www.microsoft.com</a></li>
+<li>nmap www.microsoft.com —script=http-waf-detect.nse</li>
+</ul>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/09/03/渗透测试学习笔记-弱点扫描-4/" data-toggle="tooltip" data-placement="top" title="渗透测试学习笔记-弱点扫描(4)">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/09/03/渗透测试学习笔记-Kali工具介绍-2/" data-toggle="tooltip" data-placement="top" title="渗透测试学习笔记-Kali工具介绍(2)">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#-学习笔记" title="-学习笔记">-学习笔记</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://blog.csdn.net/d_Nail" target="_blank">Dusign&#39;s Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+                    
+                        <li><a href="https://github.com/dusign" target="_blank">Dusign&#39;s Github</a></li>
+                    
+                        <li><a href="#" target="_blank">Other</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; CoCo1er 2020 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yoursite.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+</body>
+
+</html>

